@@ -1,0 +1,35 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "PlatformIO",
+			"task": "Build",
+			"problemMatcher": [
+				"$platformio"
+			],
+			"group": "build",
+			"label": "PlatformIO: Build"
+		},
+		{
+			"type": "PlatformIO",
+			"task": "Upload",
+			"problemMatcher": [
+				"$platformio"
+			],
+			"label": "PlatformIO: Upload",
+			"group": "build"
+		},
+		{
+			"type": "PlatformIO",
+			"task": "Upload Filesystem Image (esp-wrover-kit)",
+			"problemMatcher": [
+				"$platformio"
+			],
+			"label": "PlatformIO: Upload Filesystem Image (esp-wrover-kit)",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}

@@ -1,0 +1,40 @@
+{
+    "authors": [
+        {
+            "email": null, 
+            "url": "https://os.mbed.com/teams/MultiTech/", 
+            "maintainer": false, 
+            "name": "MultiTech"
+        }
+    ], 
+    "description": "Filesystem library designed for flash devices", 
+    "examples": [
+        "https://os.mbed.com/teams/MultiTech/code/flash-fs-example/", 
+        "https://os.mbed.com/teams/MultiTech/code/Dragonfly_Filesystem_Example/"
+    ], 
+    "frameworks": [
+        "mbed"
+    ], 
+    "keywords": [
+        "flash-fs"
+    ], 
+    "name": "flash-fs", 
+    "platforms": [
+        "atmelsam", 
+        "freescalekinetis", 
+        "maxim32", 
+        "nordicnrf51", 
+        "nordicnrf52", 
+        "nxplpc", 
+        "siliconlabsefm32", 
+        "ststm32", 
+        "teensy", 
+        "wiznet7500"
+    ], 
+    "repository": {
+        "type": "hg", 
+        "url": "https://os.mbed.com/teams/MultiTech/code/flash-fs/"
+    }, 
+    "version": "de478b2500", 
+    "id": 3430
+}

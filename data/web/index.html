@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="js/tailwind.js"></script>
+    <script src="js/alpine.js" defer></script>
+
+    <title>Document</title>
+</head>
+
+
+<body class="bg-gray-700 text-gray-300 text-base text-xl">
+    <div x-data="app()" x-on:patch.window="patch">
+
+        <div class="flex place-content-center  items-center  p-4   ">
+            <div class="flex  items-center  shadow-slate-900 shadow-md p-4 rounded-md  p-3">
+                <div class="w-5 h-5 rounded-full border-2 border-slate-300 mr-2" :class="{ 'bg-red-600' : !data.wsConn , 'bg-green-600' : data.wsConn }"></div>
+                <span class="text-bold" x-text="data.wsConn ?'Online':'Ofline'" :class="{ 'text-red-600' : !data.wsConn , 'text-green-600' : data.wsConn }"></span>
+            </div>
+        </div>
+        <div class="grid place-items-center mx-auto mb-20 h-screen">
+            <div class="flex flex-col md:flex-row ">
+                <div :class="esp32.sw1 ? 'shadow-green-600 shadow-[0px_0_30px_-5px]': 'shadow-slate-900'" class="flex flex-col m-4 items-center shadow-slate-900 shadow-lg p-4 rounded-lg w-80 ">
+                    <h1 :class="esp32.sw1 ? 'text-green-400': 'text-white'">Releu 1</h1>
+
+                    <img x-show="esp32.sw1" class="mb-6 mt-6" src="img/on.png " alt=" " />
+                    <img x-show="!esp32.sw1" class="mb-6 mt-6" src="img/off.png " alt=" " />
+                    <!-- Toggle esp32.sw1 -->
+                    <div class="flex flex-col items-center m-4">
+
+                        <label for="toggleesp32.sw1" class=" cursor-pointer">
+                            <!-- toggle -->
+                            <div class="relative">
+                                <!-- input -->
+                                <input x-on:click="esp32.sw1 =!esp32.sw1, send(esp32) " type="checkbox"
+                                    id="toggleesp32.sw1" class="sr-only" />
+                                <!-- line -->
+                                <div
+                                    class="pt-1  shadow-inner grid  place-items-center   shadow-lg shadow-gray-900  bg-gray-600 w-32 h-8 rounded-full">
+                                    <div class="text-green-400 font-bold" x-show="esp32.sw1">ON</div>
+                                    <div class="text-red-500 font-bold" x-show="!esp32.sw1">OFF</div>
+                                </div>
+                                <!-- dot -->
+                                <div :class="esp32.sw1 ? 'translate-x-24 bg-green-700 ': '  bg-red-700' "
+                                    class="dot border-2 border-slate-300 absolute left-1 top-1.5  w-6 h-6 rounded-full transition ">
+                                </div>
+                            </div>
+                        </label>
+
+                    </div>
+                </div>
+                <div :class="esp32.sw2 ? 'shadow-green-600 shadow-[0px_0_30px_-5px]': 'shadow-slate-900'" class="flex flex-col  m-4   items-center  shadow-slate-900 shadow-lg p-4 rounded-lg w-80   ">
+                    <h1>Releu 2</h1>
+                    <img x-show="esp32.sw2" class="mb-6 mt-6 " src="img/on.png " alt=" " />
+                    <img x-show="!esp32.sw2" class="mb-6 mt-6" src="img/off.png " alt=" " />
+                    <!-- Toggle esp32.sw2 -->
+                    <div class="flex flex-col items-center m-4 ">
+
+                        <label for="toggleesp32.sw2" class=" cursor-pointer">
+                            <!-- toggle -->
+                            <div class="relative">
+                                <!-- input -->
+                                <input x-on:click="esp32.sw2 = ! esp32.sw2, send(esp32)" type="checkbox"
+                                    id="toggleesp32.sw2" class="sr-only" />
+                                <!-- line -->
+                                <div
+                                    class="pt-1  grid  place-items-center   shadow-inner shadow-lg shadow-gray-900  bg-gray-600 w-32 h-8 rounded-full">
+                                    <div class="text-green-400 font-bold" x-show="esp32.sw2">ON</div>
+                                    <div class="text-red-500 font-bold" x-show="!esp32.sw2">OFF</div>
+                                </div>
+                                <!-- dot -->
+                                <div :class="esp32.sw2 ? 'translate-x-24 bg-green-700 ': '  bg-red-700' "
+                                    class="dot border-2 border-slate-300 absolute left-1 top-1.5  w-6 h-6 rounded-full transition ">
+                                </div>
+                            </div>
+
+                        </label>
+
+                    </div>
+                </div>
+                <div class="flex flex-col  items-center  shadow-slate-900 shadow-lg p-4 rounded-lg w-80 m-4 ">
+                    <h2>Setari </h2>
+                    <div class="divide-y">
+                        <div class="flex flex-row  items-center p-4">
+                            <input x-model="esp32.type1" class="w-6 h-6 mr-2 ml-2" type="checkbox">
+                            <h2 class="mr-4">Delay Releu 2</h2>
+                            <input x-model="esp32.delayOn1" class="shadow appearance-none border rounded w-20 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="delay" type="number">
+
+                            <div class="h-6 w-6 ml-2 relative" @mouseover="infoSw1 = true" @mouseout="infoSw1 = false">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <div x-show="infoSw1" x-transition:enter="transition ease-out duration-100 transform" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75 transform" x-transition:leave-start="opacity-100 scale-100"
+                                    x-transition:leave-end="opacity-0 scale-95" class=" absolute left-10 top-0 mt-2 w-80 rounded-md shadow-lg">
+                                    <div class="rounded-md bg-gray-800 shadow-xs px-4 py-3 text-">
+                                        <div class="flex flex-wrap -mx-2">
+                                            Bifeaza pentru activarea delay si complecteaza cu un numar secundele dorite pentru delay (numarul poate sa contina virgula).
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-row  items-center p-4 ">
+
+                            <input x-model="esp32.type2" class="w-6 h-6 mr-2  ml-2" type="checkbox">
+                            <h2 class="mr-4">Delay Releu 2</h2>
+                            <input x-model="esp32.delayOn2" class="shadow appearance-none border rounded w-20 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="delay" type="number">
+
+                            <div class="h-6 w-6 ml-2 relative" @mouseover="infoSw2 = true" @mouseout="infoSw2 = false">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <div x-show="infoSw2" x-transition:enter="transition ease-out duration-100 transform" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75 transform" x-transition:leave-start="opacity-100 scale-100"
+                                    x-transition:leave-end="opacity-0 scale-95" class=" absolute left-10 top-0 mt-2 w-80 rounded-md shadow-lg">
+                                    <div class="rounded-md bg-gray-800 shadow-xs px-4 py-3 text-">
+                                        <div class="flex flex-wrap -mx-2">
+                                            Bifeaza pentru activarea delay si complecteaza cu un numar secundele dorite pentru delay (numarul poate sa contina virgula).
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col  items-center p-4">
+                            <h2 class="mb-4">Releu Apel</h2>
+                            <div>
+                                <label for="releu_apel_1">Releu 1</label>
+                                <input class="w-6 h-6 mr-2 ml-2" id="rleu_apel_1" type="radio" name="zonaApel" x-model="esp32.zonaApel" value="1">
+
+                                <label for="releu_apel_2">Releu 2</label>
+                                <input class="w-6 h-6 mr-2 ml-2" id="rleu_apel_2" type="radio" name="zonaApel" x-model="esp32.zonaApel" value="2">
+                            </div>
+                        </div>
+                        <div class="flex flex-col  items-center p-4">
+
+                            <button @click="send(esp32)" class="bg-slate-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4">
+                                Salveaza
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class=" m-10 pb-10 ">
+                <div class=" shadow-gray-800 shadow-lg">
+                    <a href="https:componente.eu" target="_blank"><img src="img/logo_abctools.png " class="h-20" alt=" " /></a>
+                </div>
+            </div>
+
+
+        </div>
+</body>
+<script>
+    let wsConnTest;
+    let ws;
+
+    function ws_connection() {
+         ws = new WebSocket("ws://" + window.location.hostname + "/ws");
+        //ws = new WebSocket("ws://192.168.1.155/ws");
+        
+        ws.onopen = function(e) {
+            heartbeat();
+            wsConnError();
+        };
+
+        ws.onmessage = function(event) {
+            wsConnError();
+            if (event.data !== "ping" && isJson(event.data)) {
+                let input = JSON.parse(event.data);
+                if (input.defaultConf) {
+                    alpineUpdate({
+                        esp32: input,
+
+                    });
+                }
+            }
+            alpineUpdate({
+                data: {
+                    wsConn: true
+                }
+            });
+
+            console.log(`[message] Data received from server: ${event.data}`);
+        };
+
+        ws.onclose = function(event) {
+
+            alpineUpdate({
+                data: {
+                    wsConn: false
+                }
+            });
+            ws_connection();
+        };
+
+        ws.onerror = function(error) {
+            alpineUpdate({
+                data: {
+                    wsConn: false
+                }
+            });
+        };
+
+        function wsConnError() {
+            clearTimeout(wsConnTest);
+            wsConnTest = setTimeout(() => {
+                console.log("wsConnError error");
+                alpineUpdate({
+                    data: {
+                        wsConn: false
+                    }
+                });
+                ws.close();
+                return;
+
+            }, 3000)
+            alpineUpdate({
+                wsConn: true,
+            });
+        }
+    }
+    ws_connection();
+
+    function heartbeat() {
+        if (ws.readyState !== 1) {
+            alpineUpdate({
+                data: {
+                    wsConn: false
+                }
+            });
+            return;
+        }
+        ws.send('{"cmd":"ping"}');
+
+        setTimeout(heartbeat, 2000);
+    }
+
+    function alpineUpdate(val) {
+        window.dispatchEvent(new CustomEvent("patch", {
+            detail: val
+        }));
+    }
+
+    function isJson(str) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }
+
+    function send(val) {
+        console.log(val);
+        ws.send(JSON.stringify(val));
+    }
+
+    function app() {
+        window.model = {
+            esp32: {},
+            data: {
+                wsConn: false,
+            },
+            infoSw1: false,
+            infoSw2: false,
+            patch(payloadOrEvent) {
+                if (payloadOrEvent instanceof CustomEvent) {
+                    for (const key in payloadOrEvent.detail) {
+                        this[key] = payloadOrEvent.detail[key];
+                    }
+                } else {
+                    window.dispatchEvent(new CustomEvent("patch", {
+                        detail: payloadOrEvent
+                    }));
+                }
+            }
+        };
+        return window.model;
+    }
+</script>
+
+</html>
