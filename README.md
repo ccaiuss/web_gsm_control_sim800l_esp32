@@ -1,6 +1,6 @@
 ## Info
 
-[YouTube link](https://www.youtube.com/embed/S8kBtNYq9mw)
+[YouTube link](https://youtu.be/S8kBtNYq9mw)
 
 [Magazin Online](https://componente.eu)
 
