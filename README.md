@@ -79,7 +79,7 @@ zout1:1234:bt:4   //- iesirea1:parola:mod contact de tip button:secunde (contact
 ```
 
 
-
+Tags: sim800l, esp32, web control, gsm, modul gsm, controller gsm, comenzi sms sim800l, 
 
 
  
