@@ -1,3 +1,7 @@
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/S8kBtNYq9mw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
 ## Caracteristici 
 
   - Comunicarea dintre pagina web si esp32 este asincron (bidirectionala) prin websockets cu sincronizare real time intre clientii conectati.
