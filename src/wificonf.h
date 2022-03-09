@@ -1,5 +1,5 @@
-const char *wifi_ssid = "Mihai";
-const char *wifi_pass = "admin?55";
+const char *wifi_ssid = "nume antena wifi";
+const char *wifi_pass = "parola wifi";
 
 const char *ap_ssid = "ABCTools";
 const char *ap_pass = "abctools123456";
